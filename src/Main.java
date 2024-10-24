@@ -1,4 +1,4 @@
-import LV3.BaseballGame;
+import LV4.BaseballGame;
 
 import java.util.Scanner;
 
@@ -7,18 +7,30 @@ public class Main {
         BaseballGame game = new BaseballGame();  // 객체 생성과 동시에 랜덤정답 생김!
 
         int times = 0;  // 몇번째 게임
-        int checkout = 0;   // do~while문 나오기 위한 조건변수
+        int checkout = 0;   // do~while문 나오기 위한 조건 변수
+        int digits = 0; // 자릿수 설정 변수
 
         do {
             System.out.println("환영합니다! 원하시는 번호를 입력해주세요");
-            System.out.println("1. 게임 시작하기 2. 게임 기록 보기 3. 종료하기");
+            System.out.println("0. 자리수 설정 1. 게임 시작하기 2. 게임 기록 보기 3. 종료하기");
 
             Scanner sc = new Scanner(System.in);
             int selectNumber = sc.nextInt();
 
             switch (selectNumber) {
+                case 0:
+                    System.out.println("설정하고자 하는 자리수를 입력하세요.");
+
+                    digits = sc.nextInt();
+//                    try {
+//                        digits = sc.nextInt();
+//                    } catch () {
+//
+//                    }
+                    System.out.println(digits + "자리수 난이도로 설정되었습니다.");
+
                 case 1:
-                    game.makeAnswerArray();     //새로운 정답 랜덤값을 만든다.
+                    game.makeAnswerArray(digits);     //새로운 정답 랜덤값을 만든다.
                     System.out.println("< 게임을 시작합니다. >");
                     int k = 0;
                     do {
