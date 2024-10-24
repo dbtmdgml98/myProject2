@@ -17,17 +17,19 @@ public class BaseballGame {
         return tryCountList;
     }
 
-    public void makeAnswerArray(int digits) {
+    public void makeAnswerArray(int digits) throws IncorrectNumberException {
+        if(digits < 3 || digits > 5){
+            throw new IncorrectNumberException();
+        }
+
         HashSet<Integer> hashSet = new HashSet(digits);  // Set은 중복 없음!
         Random random = new Random();
         againDigits = digits;
-        System.out.println("againDigits: "+againDigits);
 
         //랜덤 answer
         while (hashSet.size() != digits) {
             hashSet.add(random.nextInt(1,9));  // 1~9 사이의 랜덤 숫자를 뽑아서 hashSet에 추가한다.
         }
-        System.out.println(hashSet);
 
         //hashSet의 데이터를 배열 answerArray 로 옮긴다.
         answerArray = new int[digits];  // 배열 크기 초기화
@@ -35,10 +37,7 @@ public class BaseballGame {
         for (int j = 0; j < digits; j++) {
             answerArray[j] = iterator.next();
         }
-        System.out.println(hashSet);
-
-        //this.answerList.addAll((hashSet.stream().toList())); // hashset을 list로 바꾸고 answerlist에 정답을 누적시킨다.(정답이 계속 바뀌게 하려고)
-        //return answerArray;
+        //System.out.println(hashSet);
     }
 
     public void play() {
@@ -71,7 +70,7 @@ public class BaseballGame {
 
             // 3. 게임 진행횟수 증가
             tryCount++;
-            System.out.println("tryCount: "+ tryCount);
+            //System.out.println("tryCount: "+ tryCount);
 
             // 4. 스트라이크 개수 계산
             int countStrike = countStrike(list);
@@ -90,7 +89,6 @@ public class BaseballGame {
         }
         // 게임 진행횟수 반환
         tryCountList.add(tryCount);
-        //return tryCount;
     }
 
     protected boolean validateInput(List<Integer> list) {

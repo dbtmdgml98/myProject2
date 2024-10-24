@@ -1,5 +1,5 @@
 import LV4.BaseballGame;
-
+import LV4.IncorrectNumberException;
 import java.util.Scanner;
 
 public class Main {
@@ -20,17 +20,18 @@ public class Main {
             switch (selectNumber) {
                 case 0:
                     System.out.println("설정하고자 하는 자리수를 입력하세요.");
-
                     digits = sc.nextInt();
-//                    try {
-//                        digits = sc.nextInt();
-//                    } catch () {
-//
-//                    }
+
                     System.out.println(digits + "자리수 난이도로 설정되었습니다.");
 
                 case 1:
-                    game.makeAnswerArray(digits);     //새로운 정답 랜덤값을 만든다.
+                    try {
+                        game.makeAnswerArray(digits);     //새로운 정답 랜덤값을 만든다.
+                    } catch (IncorrectNumberException e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
+
                     System.out.println("< 게임을 시작합니다. >");
                     int k = 0;
                     do {
