@@ -1,6 +1,13 @@
 package LV4;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
 
 public class BaseballGame {
     BaseballGameDisplay baseballGameDisplay = new BaseballGameDisplay();
@@ -8,17 +15,15 @@ public class BaseballGame {
     int againDigits;    // answerArray 배열 크기 초기화 위해 만듦,,
     int[] answerArray;  // 정답 배열(해시셋 통해서 가져옴)
 
-    // 객체 생성시 정답을 만들도록 함
-    public BaseballGame() {
-        //makeAnswerArray();
-    }
+    // 생성자
+    public BaseballGame() {}
 
     public List<Integer> getTryCountList() {
         return tryCountList;
     }
 
     public void makeAnswerArray(int digits) throws IncorrectNumberException {
-        if(digits < 3 || digits > 5){
+        if (digits < 3 || digits > 5) {
             throw new IncorrectNumberException();
         }
 
@@ -26,22 +31,23 @@ public class BaseballGame {
         Random random = new Random();
         againDigits = digits;
 
-        //랜덤 answer
+        // 랜덤 answer
         while (hashSet.size() != digits) {
             hashSet.add(random.nextInt(1,9));  // 1~9 사이의 랜덤 숫자를 뽑아서 hashSet에 추가한다.
         }
 
-        //hashSet의 데이터를 배열 answerArray 로 옮긴다.
+        // hashSet의 데이터를 배열 answerArray 로 옮긴다.
         answerArray = new int[digits];  // 배열 크기 초기화
         Iterator<Integer> iterator = hashSet.iterator();    // iterator를 통해 인덱스 없는 set에 접근한다.
         for (int j = 0; j < digits; j++) {
             answerArray[j] = iterator.next();
         }
-        //System.out.println(hashSet);
+        //System.out.println(hashSet);  // 개발자 확인용
     }
 
     public void play() {
-        int tryCount=0;
+        int tryCount = 0;
+
         while (true) {
             // 중복이 허용되는 리스트에 값을 입력받는다.
             List<Integer> list = new ArrayList<>();    // 올바르지 않은 입력값으로 인해 다시 입력받을 경우 생각하여 돌 때마다 list 초기화
@@ -70,13 +76,13 @@ public class BaseballGame {
 
             // 3. 게임 진행횟수 증가
             tryCount++;
-            //System.out.println("tryCount: "+ tryCount);
+            //System.out.println("tryCount: "+ tryCount);   // 개발자 확인용
 
             // 4. 스트라이크 개수 계산
             int countStrike = countStrike(list);
 
             // 5. 정답여부 확인, 만약 정답이면 break 를 이용해 반복문 탈출
-            if (countStrike == againDigits){
+            if (countStrike == againDigits) {
                 System.out.println("정답입니다!");
                 break;
             }
@@ -87,18 +93,18 @@ public class BaseballGame {
             // 7. 힌트 출력
             baseballGameDisplay.displayHint(countStrike, countBall);
         }
-        // 게임 진행횟수 반환
+        // 게임 시도횟수 리스트에 추가
         tryCountList.add(tryCount);
     }
 
     protected boolean validateInput(List<Integer> list) {
-        //세자리 수인지 검사
+        // 세자리 수인지 검사
         if (list.size() != againDigits) {
             System.out.println("올바르지 않은 입력값입니다. " + againDigits + "자리를 입력하세요!");
             return false;
         }
 
-        //0이 있는지 검사
+        // 0이 있는지 검사
         for (int i = 0; i < againDigits; i++) {
             if (list.get(i) == 0) {
                 System.out.println("올바르지 않은 입력값입니다. 0이 아닌 숫자를 입력하세요!");
@@ -106,7 +112,7 @@ public class BaseballGame {
             }
         }
 
-        //중복 검사
+        // 중복 검사
         Set<Integer> set = new HashSet<>(list); // 중복이 허용되는 list를 중복이 허용되지 않는 set으로 바꾸기
         if (set.size() !=  list.size()) { // list와 set의 크기가 다르면 중복값이 있다!
             System.out.println("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력하세요!");
@@ -131,7 +137,7 @@ public class BaseballGame {
 
         for (int i = 0; i < againDigits; i++) {
             for (int j = 0; j < againDigits; j++) {
-                if (list.get(i) == answerArray[j] && i != j){    //스트라이크가 아니고 볼이면
+                if (list.get(i) == answerArray[j] && i != j) {    //스트라이크가 아니고 볼이면
                     countBall++;
                 }
             }
