@@ -39,12 +39,12 @@ public class BaseballGame {
             throw new IncorrectNumberException();
         }
 
-        HashSet<Integer> hashSet = new HashSet(digits);  // Set은 중복 없음!
+        HashSet<Integer> hashSet = new HashSet<>(digits);  // Set은 중복 없음!
         Random random = new Random();
         againDigits = digits;
 
 
-        /** 랜덤 answer 생성합니다. */
+        // 랜덤 answer 생성
         while (hashSet.size() != digits) {
             hashSet.add(random.nextInt(1,9));  // 1~9 사이의 랜덤 숫자를 뽑아서 hashSet에 추가한다.
         }
@@ -66,7 +66,7 @@ public class BaseballGame {
             // 중복이 허용되는 리스트에 값을 입력받는다.
             List<Integer> list = new ArrayList<>();    // 올바르지 않은 입력값으로 인해 다시 입력받을 경우 생각하여 돌 때마다 list 초기화
 
-            /** 1. 유저에게 입력값을 받습니다. */
+            // 1. 유저에게 입력값을 받기
             Scanner s = new Scanner(System.in);
             System.out.println("숫자를 입력하세요.");
 
@@ -83,28 +83,28 @@ public class BaseballGame {
                 list.add(Integer.parseInt(sss));
             }
 
-            /** 2. 올바른 입력값을 받았는지 검증합니다. */
+            // 2. 올바른 입력값을 받았는지 검증
             if (!validateInput(list)) { // 값이 3자리 수가 아니거나 중복이 있으면 다시 돌아간다.
                 continue;
             }
 
-            /** 3. 게임 진행횟수를 증가시킵니다. */
+            // 3. 게임 진행횟수 증가
             tryCount++;
             //System.out.println("tryCount: "+ tryCount);   // 개발자 확인용
 
-            /** 4. 스트라이크 갯수를 계산합니다. */
+            // 4. 스트라이크 갯수 계산
             int countStrike = countStrike(list);
 
-            /** 5. 정답여부 확인, 만약 정답이면 break 를 이용해 반복문 탈출합니다. */
+            // 5. 정답여부 확인, 만약 정답이면 break 를 이용해 반복문 탈출
             if (countStrike == againDigits) {
                 System.out.println("정답입니다!");
                 break;
             }
 
-            /** 6. 볼 갯수를 계산합니다. */
+            // 6. 볼 갯수 계산
             int countBall = countBall(list);
 
-            /** 7. 힌트(스트라이크와 볼 갯수)를 출력합니다. */
+            // 7. 힌트(스트라이크와 볼 갯수)를 출력
             baseballGameDisplay.displayHint(countStrike, countBall);
         }
         // 게임 시도횟수 리스트에 추가
@@ -118,13 +118,13 @@ public class BaseballGame {
      * @return List가 3가지 조건을 만족하면 true, 하나라도 만족하지 않다면 false
      */
     protected boolean validateInput(List<Integer> list) {
-        /** 세자리 수인지 검사합니다. */
+        // 세자리 수 검사
         if (list.size() != againDigits) {
             System.out.println("올바르지 않은 입력값입니다. " + againDigits + "자리를 입력하세요!");
             return false;
         }
 
-        /** 0이 있는지 검사합니다. */
+        // 0 검사
         for (int i = 0; i < againDigits; i++) {
             if (list.get(i) == 0) {
                 System.out.println("올바르지 않은 입력값입니다. 0이 아닌 숫자를 입력하세요!");
@@ -132,7 +132,7 @@ public class BaseballGame {
             }
         }
 
-        /** 중복을 검사합니다. */
+        // 중복 검사
         Set<Integer> set = new HashSet<>(list); // 중복이 허용되는 list를 중복이 허용되지 않는 set으로 바꾸기
         if (set.size() !=  list.size()) { // list와 set의 크기가 다르면 중복값이 있다!
             System.out.println("올바르지 않은 입력값입니다. 중복되지 않는 숫자를 입력하세요!");
