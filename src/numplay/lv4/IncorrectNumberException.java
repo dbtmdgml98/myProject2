@@ -1,4 +1,4 @@
-package LV4;
+package numplay.lv4;
 
 /** 잘못된 입력을 받았을 때 발생하는 예외를 정의한 메소드입니다. */
 public class IncorrectNumberException extends Exception {

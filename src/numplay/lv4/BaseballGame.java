@@ -1,4 +1,4 @@
-package LV4;
+package numplay.lv4;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class BaseballGame {
     BaseballGameDisplay baseballGameDisplay = new BaseballGameDisplay();
-    private static List<Integer> tryCountList = new ArrayList<>();  // 시도횟수를 누적시키는 리스트
+    private List<Integer> tryCountList = new ArrayList<>();  // 시도횟수를 누적시키는 리스트
     int againDigits;    // answerArray 배열 크기 초기화 위해 만듦,,
     int[] answerArray;  // 정답 배열(해시셋 통해서 가져옴)
 

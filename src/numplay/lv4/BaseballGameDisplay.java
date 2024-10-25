@@ -1,4 +1,4 @@
-package LV4;
+package numplay.lv4;
 
 /** 힌트(스트라이크와 볼 갯수)를 출력하는 메소드입니다. */
 public class BaseballGameDisplay {
