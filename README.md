@@ -153,7 +153,11 @@
 <img width="330" alt="스크린샷 2024-10-25 오후 1 26 57" src="https://github.com/user-attachments/assets/7ea8b696-e736-4b1a-a9e4-4599815ca3ce">
 
 
+----
 
-    
+### 3. 작업 환경
+Version : Java 17
+IDE : IntelliJ
+tool : M1
   
   
