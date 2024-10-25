@@ -1,11 +1,11 @@
-package LV1;
+package LV2;
 
 import java.util.*;
 
 public class BaseballGame {
     HashSet<Integer> hashSet;   //정답 해시셋
     int[] answerArray = new int[3]; //정답 배열(해시셋에서 가져옴)
-
+    // Iterator<Integer> iterator; //필요한가?????????
     BaseballGameDisplay baseballGameDisplay = new BaseballGameDisplay();
 
     int number;
@@ -15,7 +15,7 @@ public class BaseballGame {
 
     // 객체 생성시 정답을 만들도록 함
     public BaseballGame() {
-        hashSet = new HashSet(3);  //초기 용량 : 3 (Set은 중복 없음)
+        hashSet = new HashSet(3);  //초기 용량 : 3 (Set은 중복 없음) 용량 지정할 필요가 있는건가??????????
         Random random = new Random();
 
         for(int i=0; i<3; i++){
@@ -46,6 +46,11 @@ public class BaseballGame {
                 throw new IllegalArgumentException("올바르지 않은 입력값입니다. 숫자를 입력하세요!");
             }
 
+            do{ //각 자릿수 비교를 위하여 먼저 list에 한자리씩 숫자를 담는다.
+                list.add(number%10);
+                number /= 10;
+            }while(number!=0);
+
             // 2. 올바른 입력값을 받았는지 검증 ->레벨2
             if(!validateInput(list)) { //값이 3자리 수가 아니거나 중복이 있으면 다시 돌아간다.
                 continue;
@@ -56,6 +61,7 @@ public class BaseballGame {
             // 5. 정답여부 확인, 만약 정답이면 break 를 이용해 반복문 탈출
             if(countstrike == 3){
                 System.out.println("정답입니다!");
+                //System.out.println(" ");
                 break;
             }
             // 6. 볼 개수 계산
@@ -68,10 +74,6 @@ public class BaseballGame {
     }
 
     protected boolean validateInput(List<Integer> list) {
-        do{ //각 자릿수 비교를 위하여 먼저 list에 한자리씩 숫자를 담는다.
-            list.add(number%10);
-            number /= 10;
-        }while(number!=0);
 
 //        if(list.get(0)==0){
 //            System.out.println("숫자가 0으로 시작할 수 없습니다!");
@@ -85,9 +87,9 @@ public class BaseballGame {
                 return false;
             }
         }
-
+        //System.out.println(list.size());
         //세자리 수인지 검사
-        if(list.size()!=3){
+        if(list.size()<3 || list.size()>3){
             System.out.println("올바르지 않은 입력값입니다. 3자리를 입력하세요!");
             return false;
         }

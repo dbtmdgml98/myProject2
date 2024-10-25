@@ -1,4 +1,4 @@
-package LV3;
+package numplay.lv3;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class BaseballGame {
         //return answerArray;
     }
 
-    public int play() {
+    public void play() {
         int tryCount=0;
         while (true) {
             // 중복이 허용되는 리스트에 값을 입력받는다.
@@ -64,7 +64,6 @@ public class BaseballGame {
             }
 
             // 3. 게임 진행횟수 증가
-
             tryCount++;
             System.out.println("tryCount: "+ tryCount);
 
@@ -85,7 +84,7 @@ public class BaseballGame {
         }
         // 게임 진행횟수 반환
         tryCountList.add(tryCount);
-        return tryCount;
+        //return tryCount;
     }
 
     protected boolean validateInput(List<Integer> list) {

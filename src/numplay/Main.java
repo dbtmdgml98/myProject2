@@ -1,5 +1,7 @@
-import LV4.BaseballGame;
-import LV4.IncorrectNumberException;
+package numplay;
+
+import numplay.lv4.BaseballGame;
+import numplay.lv4.IncorrectNumberException;
 import java.util.Scanner;
 
 public class Main {
@@ -27,24 +29,24 @@ public class Main {
                 case 1 :
                     try {
                         game.makeAnswerArray(digits);   // 새로운 정답 랜덤값을 만든다.
-                    } catch (IncorrectNumberException e) {  // 3,4,5 외의 숫자를 입력하면 예외 발생하고
-                        System.out.println(e.getMessage()); // 예외 메세지 출력
+                    } catch (IncorrectNumberException e) {  // 3,4,5 외의 숫자를 입력하면 예외 발생
+                        System.out.println(e.getMessage());
                         break;
                     }
 
                     System.out.println("< 게임을 시작합니다. >");
 
-                    int k = 0;
+                    int check = 0;
                     do {
                         try {
-                            game.play();    // play()를 실행하다가
+                            game.play();
                             times++;
                             break;
-                        } catch (IllegalArgumentException e) {  // 예외가 발생하면
-                            System.out.println(e.getMessage()); // 예외메세지 출력
-                            k++;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                            check++;
                         }
-                    } while (k != 0);   //예외가 발생하면 다시 처음부터 play()를 실행한다.
+                    } while (check != 0);   // 예외가 발생하면 다시 처음부터 play()를 실행한다.
                     break;
                 case 2 :
                     System.out.println("< 게임 기록 보기 >");
